@@ -1,3 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Mensagem Importante</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ece9e6, #ffffff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            transition: all 0.3s ease;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #4a4a4a;
+            line-height: 1.4;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        .btn-secondary {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #da190b;
+        }
+
+        /* Classe para esconder as etapas */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- ETAPA 1: O cumprimento inicial -->
+        <div id="etapa1">
+            <h2>Oi, como você está?</h2>
+            <div class="btn-container">
+                <button class="btn-primary" onclick="irParaEtapa2('Que bom! Fico feliz em saber.')">Estou bem</button>
+                <button class="btn-secondary" onclick="irParaEtapa2('Sinto muito por ouvir isso... Espero que melhore.')">Estou mal</button>
+            </div>
+        </div>
+
+        <!-- ETAPA 2: O pedido de perdão -->
+        <div id="etapa2" class="hidden">
+            <h2 id="feedback-txt"></h2>
+            <h2>Você me perdoaria?</h2>
+            <div class="btn-container">
+                <button class="btn-primary" onclick="irParaFinal(true)">Sim</button>
+                <button class="btn-secondary" onclick="irParaFinal(false)">Não</button>
+            </div>
+        </div>
+
+        <!-- ETAPA FINAL: Mensagem de encerramento -->
+        <div id="final" class="hidden">
+            <h2 id="mensagem-final"></h2>
+        </div>
+    </div>
+
+    <script>
+        // Função que avança da primeira pergunta para o pedido de perdão
+        function irParaEtapa2(mensagemFeedback) {
+            document.getElementById('etapa1').classList.add('hidden');
+            
+            // Mostra uma mensagem curta baseada em como a pessoa está antes da próxima pergunta
+            document.getElementById('feedback-txt').innerText = mensagemFeedback;
+            
+            document.getElementById('etapa2').classList.remove('hidden');
+        }
+
+        // Função que mostra o resultado final dependendo do perdão
+        function irParaFinal(perdoou) {
+            document.getElementById('etapa2').classList.add('hidden');
+            const msgFinal = document.getElementById('mensagem-final');
+
+            if (perdoou) {
+                msgFinal.innerHTML = "❤️ Obrigado! Significa muito para mim. Prometo fazer valer a pena.";
+                msgFinal.style.color = "#4CAF50";
+            } else {
+                msgFinal.innerHTML = "😔 Tudo bem, eu entendo e respeito o seu tempo. Obrigado por responder.";
+                msgFinal.style.color = "#f44336";
+            }
+
+            document.getElementById('final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
 
 
 <!DOCTYPE html>
